@@ -1,8 +1,10 @@
 - type: entity
-  parent: BaseReinforcementBeacon
   id: BaseERTReinforcement
   abstract: true
   components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/reinforcement_callers/reinforcement_beacon.rsi
+    state: icon
   - type: GhostRole
     job: ERTLeader
     name: ghost-role-information-leader-description
@@ -18,6 +20,7 @@
       time: 18000 # five hours
   - type: GhostCharacterSpawner
     components:
+    - type: IdBind
     - type: Loadout
     - type: AutoImplant
       implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, BluespaceLifelineImplant ] # bluespace implant because unrobust ERT keep giving antags/selfantags free loot
