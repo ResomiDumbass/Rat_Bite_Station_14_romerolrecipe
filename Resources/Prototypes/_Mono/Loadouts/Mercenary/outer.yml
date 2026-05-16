@@ -1,0 +1,18 @@
+- type: loadout
+  id: MercenaryVestSlim
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterArmorBasicSlim
+
+- type: loadout
+  id: MercenaryVestNormal
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterArmorBasic
+
+- type: loadout
+  id: MercenaryClothingOuterVestDetective
+  price: 0
+  equipment:
+    outerClothing: ClothingOuterVestDetective
+

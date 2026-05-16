@@ -1,0 +1,62 @@
+- type: roleLoadout
+  id: JobCadet # Unused
+  points: 75000
+  groups:
+  - TsfmcBackpack
+  - TsfmcShoes
+  - TsfmcFace
+#  - ContractorImplanter # Mono - TSF has a skill issue sometimes
+  - TsfmcFirearm
+  canCustomizeName: true # pseudonym?
+
+- type: roleLoadout
+  id: JobDeputy # Marine
+  points: 75000
+  groups:
+  - TsfmcBackpack
+  - TsfmcShoes
+  - TsfmcFace
+  - TsfmcFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobBailiff # Captain
+  points: 75000
+  groups:
+  - TsfmcBackpack
+  - TsfmcShoes
+  - TsfmcFace
+  - TsfmcFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobSeniorOfficer # Fireteam Leader
+  points: 75000
+  groups:
+  - TsfmcBackpack
+  - TsfmcShoes
+  - TsfmcFace
+  - TsfmcFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobSheriff # Colonel
+  points: 75000
+  groups:
+  - TsfmcBackpack
+  - TsfmcShoes
+  - TsfmcFace
+  - TsfmcFirearmColonel
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobTsfEngineer # Engineer
+  points: 75000
+  groups:
+  - TsfmcHeadEngi
+  - TsfmcEngiModsuit
+  - TsfmcShoes
+  - TsfmcFace
+  - TsfmcEngiGlasses
+  - TsfmcUtilBelt
+  canCustomizeName: true

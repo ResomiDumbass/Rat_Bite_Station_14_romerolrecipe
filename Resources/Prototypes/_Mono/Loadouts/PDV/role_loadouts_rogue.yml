@@ -1,0 +1,47 @@
+- type: roleLoadout
+  id: JobPirate
+  points: 75000
+  groups:
+  - PDVHud
+  - PDVShoes
+  - RogueFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobPirateFirstMate
+  points: 75000
+  groups:
+  - PDVHud
+  - PDVShoes
+  - PDVFace
+  - RogueFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobPirateCaptain
+  points: 75000
+  groups:
+  - PDVHud
+  - PDVShoes
+  - PDVFace
+  - RogueFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobPDVInfiltrator
+  points: 75000
+  groups:
+  - PDVHud
+  - PDVShoes
+  - PDVFace
+  - RogueFirearm
+  canCustomizeName: true
+
+- type: roleLoadout
+  id: JobPDVDenasvar
+  points: 75000
+  groups:
+  - PDVHud
+  - PDVShoes
+  - RogueFirearm
+  canCustomizeName: true

@@ -1,0 +1,54 @@
+- type: roleLoadout
+  id: JobUSSPRifleman
+  points: 75000
+  groups:
+  - USSPHead
+  - TsfmcShoes
+  - TsfmcFace
+  - USSPBelt
+  - UsspFirearm
+
+- type: roleLoadout
+  id: JobUSSPCorporal
+  points: 75000
+  groups:
+  - USSPHead
+  - USSPOuterClothing
+  - TsfmcShoes
+  - TsfmcFace
+  - USSPBelt
+  - UsspFirearm
+
+
+- type: roleLoadout
+  id: JobUSSPMedic
+  points: 75000
+  groups:
+  - USSPHead
+  - TsfmcBrigmedicGloves
+  - USSPOuterClothing
+  - TsfmcShoes
+  - TsfmcFace
+  - USSPMedhud
+  - USSPBeltMedic
+  - UsspFirearm
+
+- type: roleLoadout
+  id: JobUSSPSergeant
+  points: 75000
+  groups:
+  - TsfmcShoes
+  - TsfmcFace
+  - USSPBelt
+  - USSPOuterClothingOfficer
+  - UsspFirearm
+
+- type: roleLoadout
+  id: JobUSSPCommissar
+  points: 75000
+  groups:
+  - USSPOuterClothingOfficer
+  - TsfmcShoes
+  - TsfmcFace
+  - USSPBelt
+  - UsspFirearm

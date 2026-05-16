@@ -1,0 +1,22 @@
+- type: loadoutGroup
+  id: RogueFirearm
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionC20RLoadout
+  # - FactionWt550Loadout
+  # - FactionLecterLoadout
+  fallbacks:
+  - FactionC20RLoadout
+
+- type: loadoutGroup
+  id: RogueFirearmCommander
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionC20RLoadout
+  - FactionWt550Loadout
+  # - FactionLecterLoadout
+  - FactionAkmLoadout
+  fallbacks:
+

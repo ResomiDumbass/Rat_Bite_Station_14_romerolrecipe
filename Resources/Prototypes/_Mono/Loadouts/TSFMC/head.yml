@@ -1,0 +1,10 @@
+- type: loadout
+  id: TsfmcBeretEngineer
+  equipment:
+    head: ClothingHeadHatBeretEngineering
+
+- type: loadout
+  id: TsfmcBeretMedic
+  equipment:
+    head: ClothingHeadHatBeretBrigmedic
+

@@ -1,0 +1,25 @@
+- type: loadoutGroup
+  id: MercenaryFirearm
+  name: loadout-group-weapon
+  minLimit: 0
+  loadouts:
+  # - MercenaryEnforcerLoadout
+  # - MercenaryWt550Loadout
+  # - MercenaryC20rLoadout
+  - MercenaryMosinLoadout
+  - MercenaryLaserCarbineLoadout
+
+- type: loadoutGroup
+  id: MercenaryPistol
+  name: loadout-group-pistol
+  minLimit: 0
+  loadouts:
+  - MercenaryMk58Loadout
+  - MercenarySawedOffLoadout
+  - ContractorDisablerLoadout
+  - MercenaryCombatKnifeLoadout
+  - MercenaryKukriKnifeLoadout
+  - MercenaryThrowingKnifeLoadout
+  - MercenaryMacheteLoadout
+  fallbacks:
+

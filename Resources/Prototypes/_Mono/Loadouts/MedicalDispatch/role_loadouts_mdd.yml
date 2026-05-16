@@ -1,0 +1,11 @@
+- type: roleLoadout
+  id: JobMdMedic
+  points: 75000
+  groups:
+  - MdMedicJumpsuit
+  - MdMedicGloves
+  - MdMedicBackpack
+  - MdMedicEars
+  - MdMedicPDA
+  - MercenaryFirearm
+  - MercenaryPistol

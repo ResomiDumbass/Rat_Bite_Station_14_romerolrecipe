@@ -1,0 +1,12 @@
+- type: loadout
+  id: MercenaryClothingBeltBandolier
+  price: 0
+  equipment:
+    belt: ClothingBeltBandolier
+
+- type: loadout
+  name: security belt (empty)
+  id: MercenaryClothingBeltSecurityEmpty
+  price: 0
+  equipment:
+    belt: ClothingBeltSecurity

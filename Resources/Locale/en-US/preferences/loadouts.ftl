@@ -17,6 +17,7 @@ loadout-restrictions = Restrictions
 loadouts-min-limit = Min count: {$count}
 loadouts-max-limit = Max count: {$count}
 loadouts-points-limit = Points: {$count} / {$max}
+loadouts-cost-label = {$name} ({$cost} pts)
 
 loadouts-count-items-in-group = {$item} and {$count} other {$count ->
 [1] item

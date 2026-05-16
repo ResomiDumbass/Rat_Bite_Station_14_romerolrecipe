@@ -1,0 +1,5 @@
+- type: loadout
+  id: TsfmcEngiClothingModsuit2
+  equipment:
+    back: ClothingModsuitEngineerPowerCell
+

@@ -1,0 +1,16 @@
+- type: loadoutGroup
+  id: UsspFirearm
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionMosinLoadout
+  fallbacks:
+
+- type: loadoutGroup
+  id: UsspFirearmCommissar
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionMosinLoadout
+  fallbacks:
+

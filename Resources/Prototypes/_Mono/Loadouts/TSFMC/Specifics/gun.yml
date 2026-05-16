@@ -1,0 +1,19 @@
+- type: loadoutGroup
+  id: TsfmcFirearmColonel
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionDrozdLoadout
+  - FactionLecterLoadout
+  fallbacks:
+
+- type: loadoutGroup
+  id: TsfmcFirearm
+  name: loadout-group-weapon
+  minLimit: 1
+  loadouts:
+  - FactionLecterLoadout
+  - FactionDrozdLoadout
+  # - FactionBanditLoadout
+  fallbacks:
+

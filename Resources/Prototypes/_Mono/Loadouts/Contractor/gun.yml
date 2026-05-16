@@ -1,0 +1,12 @@
+- type: loadoutGroup
+  id: ContractorFirearm
+  minLimit: 0
+  name: loadout-group-weapon-civilian
+  loadouts:
+  - ContractorLaserLoadout
+  - ContractorSurvivalKnifeLoadout
+  - ContractorDisablerLoadout
+  - ContractorSvalinnLoadout
+  - ContractorDoubleBarreledLoadout
+  fallbacks:
+
