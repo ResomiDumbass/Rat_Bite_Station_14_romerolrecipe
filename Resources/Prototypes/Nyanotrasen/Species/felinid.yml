@@ -21,7 +21,7 @@
 - type: species
   id: Felinid
   name: species-name-felinid
-  roundStart: false # Goobstation change
+  roundStart: true # Ratbite - re-enable felinids in character setup
   prototype: MobFelinid
   sprites: MobHumanSprites
   markingLimits: MobFelinidMarkingLimits

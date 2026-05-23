@@ -132,9 +132,13 @@
   - type: Sprinter
     staminaDrainRate: 12 # Ratbite
   - type: ThermalVision
+    thermalShader: null
+    isActive: true
     color: "#ABCDEF"
+    drawOverlay: false
     activateSound: null
     deactivateSound: null
+    lightRadius: 25
 
 - type: entity
   save: false
