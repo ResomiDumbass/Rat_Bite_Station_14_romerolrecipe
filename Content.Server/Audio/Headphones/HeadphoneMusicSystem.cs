@@ -6,13 +6,13 @@ using Content.Shared.Audio.Headphones;
 using Content.Shared.Audio.Jukebox;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
-using Robust.Shared.Audio.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -23,6 +23,7 @@ public sealed class HeadphoneMusicSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
@@ -34,8 +35,8 @@ public sealed class HeadphoneMusicSystem : EntitySystem
         SubscribeLocalEvent<HeadphoneMusicComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<HeadphoneMusicComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
         SubscribeLocalEvent<HeadphoneMusicComponent, ItemToggledEvent>(OnToggled);
-        SubscribeLocalEvent<HeadphoneMusicComponent, GotEquippedEvent>(OnEquipped);
-        SubscribeLocalEvent<HeadphoneMusicComponent, GotUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<HeadphoneMusicComponent, GotEquippedEvent>(OnGotEquipped);
+        SubscribeLocalEvent<HeadphoneMusicComponent, GotUnequippedEvent>(OnGotUnequipped);
         SubscribeLocalEvent<HeadphoneMusicComponent, HeadphoneMusicSelectedMessage>(OnSongSelected);
         SubscribeLocalEvent<HeadphoneMusicComponent, HeadphoneMusicSetTimeMessage>(OnSetTime);
         SubscribeLocalEvent<HeadphoneMusicComponent, ComponentShutdown>(OnShutdown);
@@ -78,14 +79,14 @@ public sealed class HeadphoneMusicSystem : EntitySystem
         StopPlayback(ent);
     }
 
-    private void OnEquipped(Entity<HeadphoneMusicComponent> ent, ref GotEquippedEvent args)
+    private void OnGotEquipped(Entity<HeadphoneMusicComponent> ent, ref GotEquippedEvent args)
     {
-        UpdatePlaybackRange(ent);
+        DeactivateIfRangeChanged(ent);
     }
 
-    private void OnUnequipped(Entity<HeadphoneMusicComponent> ent, ref GotUnequippedEvent args)
+    private void OnGotUnequipped(Entity<HeadphoneMusicComponent> ent, ref GotUnequippedEvent args)
     {
-        UpdatePlaybackRange(ent);
+        DeactivateIfRangeChanged(ent);
     }
 
     private void OnSongSelected(Entity<HeadphoneMusicComponent> ent, ref HeadphoneMusicSelectedMessage args)
@@ -123,32 +124,38 @@ public sealed class HeadphoneMusicSystem : EntitySystem
             return;
         }
 
-        ent.Comp.AudioStream = _audio.PlayPvs(song.Path, ent.Owner, GetAudioParams(ent))?.Entity;
+        var maxDistance = GetMaxDistance(ent);
+        ent.Comp.AudioStream = _audio.PlayPvs(song.Path, ent.Owner, GetAudioParams(maxDistance))?.Entity;
+        ent.Comp.ActiveMaxDistance = maxDistance;
         Dirty(ent);
     }
 
     private void StopPlayback(Entity<HeadphoneMusicComponent> ent)
     {
         ent.Comp.AudioStream = _audio.Stop(ent.Comp.AudioStream);
+        ent.Comp.ActiveMaxDistance = null;
         Dirty(ent);
     }
 
-    private void UpdatePlaybackRange(Entity<HeadphoneMusicComponent> ent)
+    private void DeactivateIfRangeChanged(Entity<HeadphoneMusicComponent> ent)
     {
-        if (ent.Comp.AudioStream == null ||
-            !TryComp<AudioComponent>(ent.Comp.AudioStream, out var audio))
+        if (ent.Comp.ActiveMaxDistance == null ||
+            !TryComp<ItemToggleComponent>(ent, out var toggle) ||
+            !toggle.Activated)
         {
             return;
         }
 
-        var maxDistance = GetMaxDistance(ent);
-        _audio.SetMaxDistance(ent.Comp.AudioStream, maxDistance, audio);
+        if (ent.Comp.ActiveMaxDistance.Value.Equals(GetMaxDistance(ent)))
+            return;
+
+        _toggle.TryDeactivate(ent.Owner, predicted: false);
     }
 
-    private AudioParams GetAudioParams(Entity<HeadphoneMusicComponent> ent)
+    private AudioParams GetAudioParams(float maxDistance)
     {
         return AudioParams.Default
-            .WithMaxDistance(GetMaxDistance(ent))
+            .WithMaxDistance(maxDistance)
             .WithVolume(-6f);
     }
 

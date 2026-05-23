@@ -23,6 +23,8 @@ public sealed partial class HeadphoneMusicComponent : Component
 
     [DataField]
     public float PrivateMaxDistance = 1f;
+
+    public float? ActiveMaxDistance;
 }
 
 [Serializable, NetSerializable]
