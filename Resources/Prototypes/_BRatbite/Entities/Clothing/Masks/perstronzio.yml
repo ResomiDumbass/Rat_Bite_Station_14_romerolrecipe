@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: ClothingMaskClownUnremoveable
+  parent: ClothingMaskClown
   id: ClothingMaskPerstronzio
   name: Lord Perstronzio's Regal Mask
   suffix: Perstronzio, Unremoveable
