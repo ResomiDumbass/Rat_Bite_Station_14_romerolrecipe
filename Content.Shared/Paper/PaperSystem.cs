@@ -87,6 +87,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
 using Robust.Shared.Prototypes;
+using Content.Shared._BRatbite.Paper;
 
 namespace Content.Shared.Paper;
 
@@ -122,7 +123,7 @@ public sealed class PaperSystem : EntitySystem
     {
         if (!string.IsNullOrEmpty(entity.Comp.Content))
         {
-            SetContent(entity, Loc.GetString(entity.Comp.Content));
+            SetContent(entity, Loc.GetString(entity.Comp.Content), entity.Comp.Strokes);
         }
     }
 
@@ -259,7 +260,7 @@ public sealed class PaperSystem : EntitySystem
 
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
-            SetContent(entity, args.Text);
+            SetContent(entity, args.Text, args.Strokes);
 
             var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
 
@@ -324,16 +325,18 @@ public sealed class PaperSystem : EntitySystem
         }
     }
 
-    public void SetContent(EntityUid entity, string content)
+    public void SetContent(EntityUid entity, string content, List<PaperStroke>? strokes = null)
     {
         if (!TryComp<PaperComponent>(entity, out var paper))
             return;
-        SetContent((entity, paper), content);
+        SetContent((entity, paper), content, strokes);
     }
 
-    public void SetContent(Entity<PaperComponent> entity, string content)
+    public void SetContent(Entity<PaperComponent> entity, string content, List<PaperStroke>? strokes = null)
     {
+	strokes ??= new();
         entity.Comp.Content = content;
+	entity.Comp.Strokes = strokes;
         Dirty(entity);
         UpdateUserInterface(entity);
 
@@ -349,7 +352,7 @@ public sealed class PaperSystem : EntitySystem
 
     public void UpdateUserInterface(Entity<PaperComponent> entity)
     {
-        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode));
+        _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Strokes, entity.Comp.Mode));
     }
 }
 

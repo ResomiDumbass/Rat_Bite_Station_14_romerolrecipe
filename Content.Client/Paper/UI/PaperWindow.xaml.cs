@@ -96,6 +96,7 @@ using Robust.Shared.Utility;
 using Robust.Client.UserInterface.RichText;
 using Content.Client.UserInterface.RichText;
 using Robust.Shared.Input;
+using Content.Shared._BRatbite.Paper;
 
 namespace Content.Client.Paper.UI
 {
@@ -133,7 +134,7 @@ namespace Content.Client.Paper.UI
             typeof(MonoTag)
         };
 
-        public event Action<string>? OnSaved;
+        public event Action<string, List<PaperStroke>>? OnSaved;
 
         private int _MaxInputLength = -1;
         public int MaxInputLength
@@ -179,13 +180,30 @@ namespace Content.Client.Paper.UI
                 UpdateFillState();
             };
 
+	    DrawButton.OnPressed += _ =>
+	    {
+		OnDrawToggle();
+	    };
+
             SaveButton.OnPressed += _ =>
             {
                 RunOnSaved();
             };
+	    UndoDrawing.OnPressed += _ =>
+	    {
+		OnUndoDrawing();
+	    };
+	    ClearDrawing.OnPressed += _ =>
+	    {
+		OnClearDrawing();
+	    };
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
+
+	    DrawButton.Text = Loc.GetString("paper-ui-draw-button");
+	    UndoDrawing.Text = Loc.GetString("paper-ui-undo-drawing");
+	    ClearDrawing.Text = Loc.GetString("paper-ui-clear-drawing");
         }
 
         /// <summary>
@@ -376,6 +394,7 @@ namespace Content.Client.Paper.UI
             {
                 StampDisplay.AddStamp(new StampWidget{ StampInfo = stamper });
             }
+            DrawWindow.Strokes = state.Strokes;
         }
 
         /// <summary>
@@ -387,6 +406,10 @@ namespace Content.Client.Paper.UI
         protected override DragMode GetDragModeFor(Vector2 relativeMousePos)
         {
             var mode = DragMode.None;
+
+	    // Ratbite: Disable dragging while drawing
+	    if (DrawWindow.Drawing)
+		return mode;
 
             // Be quite generous with resize margins:
             if (relativeMousePos.Y < DRAG_MARGIN_SIZE)
@@ -418,7 +441,9 @@ namespace Content.Client.Paper.UI
         {
             // Prevent further saving while text processing still in
             SaveButton.Disabled = true;
-            OnSaved?.Invoke(Rope.Collapse(Input.TextRope));
+	    // Ratbite: Stop drawing
+	    DrawWindow.Drawing = false;
+            OnSaved?.Invoke(Rope.Collapse(Input.TextRope), DrawWindow.Strokes);
         }
 
         private void UpdateFillState()
@@ -440,5 +465,32 @@ namespace Content.Client.Paper.UI
                 SaveButton.Disabled = false;
             }
         }
+
+	// Ratbite: toggle drawing mode
+	private void OnDrawToggle()
+	{
+	    DrawWindow.Drawing = !DrawWindow.Drawing;
+	    DrawButton.Pressed = DrawWindow.Drawing;
+	    
+	    if (DrawWindow.Drawing)
+	    {
+		Input.MouseFilter = MouseFilterMode.Ignore;
+	    }
+	    else
+	    {
+		Input.MouseFilter = MouseFilterMode.Stop;
+	    }
+	}
+	
+	private void OnUndoDrawing()
+	{
+	    if (DrawWindow.Strokes.Count > 0)
+		DrawWindow.Strokes.RemoveAt(DrawWindow.Strokes.Count - 1);
+	}
+	
+	private void OnClearDrawing()
+	{
+	    DrawWindow.Strokes.Clear();
+	}
     }
 }
