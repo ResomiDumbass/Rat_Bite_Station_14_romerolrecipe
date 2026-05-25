@@ -5,7 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._BRatbite.Paper;
 
 [Serializable, NetSerializable]
-public sealed class PaperStroke : BoundUserInterfaceState
+public sealed class PaperStroke
 {
     public List<Vector2> Points = new();
     public Color Color;
