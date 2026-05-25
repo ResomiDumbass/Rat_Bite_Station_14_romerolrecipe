@@ -140,12 +140,12 @@ public sealed partial class PaperComponent : Component
     public sealed class PaperInputTextMessage : BoundUserInterfaceMessage
     {
         public readonly string Text;
-	public readonly List<PaperStroke> Strokes; // Ratbite: paper drawing
+        public readonly List<PaperStroke> Strokes; // Ratbite: paper drawing
 
         public PaperInputTextMessage(string text, List<PaperStroke> strokes)
         {
             Text = text;
-	    Strokes = strokes;
+            Strokes = strokes;
         }
     }
 

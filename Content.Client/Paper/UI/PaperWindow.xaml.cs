@@ -180,30 +180,30 @@ namespace Content.Client.Paper.UI
                 UpdateFillState();
             };
 
-	    DrawButton.OnPressed += _ =>
-	    {
-		OnDrawToggle();
-	    };
+            DrawButton.OnPressed += _ =>
+            {
+                OnDrawToggle();
+            };
 
             SaveButton.OnPressed += _ =>
             {
                 RunOnSaved();
             };
-	    UndoDrawing.OnPressed += _ =>
-	    {
-		OnUndoDrawing();
-	    };
-	    ClearDrawing.OnPressed += _ =>
-	    {
-		OnClearDrawing();
-	    };
+            UndoDrawing.OnPressed += _ =>
+            {
+                OnUndoDrawing();
+            };
+            ClearDrawing.OnPressed += _ =>
+            {
+                OnClearDrawing();
+            };
 
             SaveButton.Text = Loc.GetString("paper-ui-save-button",
                 ("keybind", _inputManager.GetKeyFunctionButtonString(EngineKeyFunctions.MultilineTextSubmit)));
 
-	    DrawButton.Text = Loc.GetString("paper-ui-draw-button");
-	    UndoDrawing.Text = Loc.GetString("paper-ui-undo-drawing");
-	    ClearDrawing.Text = Loc.GetString("paper-ui-clear-drawing");
+            DrawButton.Text = Loc.GetString("paper-ui-draw-button");
+            UndoDrawing.Text = Loc.GetString("paper-ui-undo-drawing");
+            ClearDrawing.Text = Loc.GetString("paper-ui-clear-drawing");
         }
 
         /// <summary>
@@ -214,11 +214,11 @@ namespace Content.Client.Paper.UI
         {
             // Randomize the placement of any stamps based on the entity UID
             // so that there's some variety in different papers.
-            StampDisplay.PlacementSeed = (int)entity;
+            StampDisplay.PlacementSeed = (int) entity;
 
             // Initialize the background:
             PaperBackground.ModulateSelfOverride = visuals.BackgroundModulate;
-            var backgroundImage = visuals.BackgroundImagePath != null? _resCache.GetResource<TextureResource>(visuals.BackgroundImagePath) : null;
+            var backgroundImage = visuals.BackgroundImagePath != null ? _resCache.GetResource<TextureResource>(visuals.BackgroundImagePath) : null;
             if (backgroundImage != null)
             {
                 var backgroundImageMode = visuals.BackgroundImageTile ? StyleBoxTexture.StretchMode.Tile : StyleBoxTexture.StretchMode.Stretch;
@@ -253,7 +253,7 @@ namespace Content.Client.Paper.UI
                     visuals.HeaderMargin.Right, visuals.HeaderMargin.Bottom);
 
             // Then the footer
-            if (visuals.FooterImagePath is {} path)
+            if (visuals.FooterImagePath is { } path)
             {
                 FooterImage.TexturePath = path.ToString();
                 FooterImage.MinSize = FooterImage.TextureNormal?.Size ?? Vector2.Zero;
@@ -287,7 +287,7 @@ namespace Content.Client.Paper.UI
 
             if (visuals.MaxWritableArea != null)
             {
-                var a = (Vector2)visuals.MaxWritableArea;
+                var a = (Vector2) visuals.MaxWritableArea;
                 // Paper has requested that this has a maximum area that you can write on.
                 // So, we'll make the window non-resizable and fix the size of the content.
                 // Ideally, would like to be able to allow resizing only one direction.
@@ -342,7 +342,7 @@ namespace Content.Client.Paper.UI
                 {
                     var headerHeight = HeaderImage.Size.Y + HeaderImage.Margin.Top + HeaderImage.Margin.Bottom;
                     var headerInLines = headerHeight / (fontLineHeight * _paperContentLineScale);
-                    var paddingRequiredInLines = (float)Math.Ceiling(headerInLines) - headerInLines;
+                    var paddingRequiredInLines = (float) Math.Ceiling(headerInLines) - headerInLines;
                     var verticalMargin = fontLineHeight * paddingRequiredInLines * _paperContentLineScale;
                     TextAlignmentPadding.Margin = new Thickness(0.0f, verticalMargin, 0.0f, 0.0f);
                 }
@@ -390,9 +390,9 @@ namespace Content.Client.Paper.UI
 
             StampDisplay.RemoveAllChildren();
             StampDisplay.RemoveStamps();
-            foreach(var stamper in state.StampedBy)
+            foreach (var stamper in state.StampedBy)
             {
-                StampDisplay.AddStamp(new StampWidget{ StampInfo = stamper });
+                StampDisplay.AddStamp(new StampWidget { StampInfo = stamper });
             }
             DrawWindow.Strokes = state.Strokes;
         }
@@ -407,9 +407,9 @@ namespace Content.Client.Paper.UI
         {
             var mode = DragMode.None;
 
-	    // Ratbite: Disable dragging while drawing
-	    if (DrawWindow.Drawing)
-		return mode;
+            // Ratbite: Disable dragging while drawing
+            if (DrawWindow.Drawing)
+                return mode;
 
             // Be quite generous with resize margins:
             if (relativeMousePos.Y < DRAG_MARGIN_SIZE)
@@ -430,7 +430,7 @@ namespace Content.Client.Paper.UI
                 mode |= DragMode.Right;
             }
 
-            if((mode & _allowedResizeModes) == DragMode.None)
+            if ((mode & _allowedResizeModes) == DragMode.None)
             {
                 return DragMode.Move;
             }
@@ -441,8 +441,8 @@ namespace Content.Client.Paper.UI
         {
             // Prevent further saving while text processing still in
             SaveButton.Disabled = true;
-	    // Ratbite: Stop drawing
-	    DrawWindow.Drawing = false;
+            // Ratbite: Stop drawing
+            DrawWindow.Drawing = false;
             OnSaved?.Invoke(Rope.Collapse(Input.TextRope), DrawWindow.Strokes);
         }
 
@@ -466,31 +466,31 @@ namespace Content.Client.Paper.UI
             }
         }
 
-	// Ratbite: toggle drawing mode
-	private void OnDrawToggle()
-	{
-	    DrawWindow.Drawing = !DrawWindow.Drawing;
-	    DrawButton.Pressed = DrawWindow.Drawing;
-	    
-	    if (DrawWindow.Drawing)
-	    {
-		Input.MouseFilter = MouseFilterMode.Ignore;
-	    }
-	    else
-	    {
-		Input.MouseFilter = MouseFilterMode.Stop;
-	    }
-	}
-	
-	private void OnUndoDrawing()
-	{
-	    if (DrawWindow.Strokes.Count > 0)
-		DrawWindow.Strokes.RemoveAt(DrawWindow.Strokes.Count - 1);
-	}
-	
-	private void OnClearDrawing()
-	{
-	    DrawWindow.Strokes.Clear();
-	}
+        // Ratbite: toggle drawing mode
+        private void OnDrawToggle()
+        {
+            DrawWindow.Drawing = !DrawWindow.Drawing;
+            DrawButton.Pressed = DrawWindow.Drawing;
+
+            if (DrawWindow.Drawing)
+            {
+                Input.MouseFilter = MouseFilterMode.Ignore;
+            }
+            else
+            {
+                Input.MouseFilter = MouseFilterMode.Stop;
+            }
+        }
+
+        private void OnUndoDrawing()
+        {
+            if (DrawWindow.Strokes.Count > 0)
+                DrawWindow.Strokes.RemoveAt(DrawWindow.Strokes.Count - 1);
+        }
+
+        private void OnClearDrawing()
+        {
+            DrawWindow.Strokes.Clear();
+        }
     }
 }

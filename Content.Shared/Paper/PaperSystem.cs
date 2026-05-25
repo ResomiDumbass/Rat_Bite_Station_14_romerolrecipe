@@ -334,9 +334,9 @@ public sealed class PaperSystem : EntitySystem
 
     public void SetContent(Entity<PaperComponent> entity, string content, List<PaperStroke>? strokes = null)
     {
-	strokes ??= new();
+        strokes ??= new();
         entity.Comp.Content = content;
-	entity.Comp.Strokes = strokes;
+        entity.Comp.Strokes = strokes;
         Dirty(entity);
         UpdateUserInterface(entity);
 

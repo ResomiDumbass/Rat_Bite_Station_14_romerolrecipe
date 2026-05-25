@@ -28,12 +28,12 @@ public sealed partial class DrawWindow : Container
     private bool _drawing = false;
     public bool Drawing
     {
-	get => _drawing;
-	set
-	{
-	    _drawing = value;
-	    MouseFilter = value ? MouseFilterMode.Stop : MouseFilterMode.Ignore;
-	}
+        get => _drawing;
+        set
+        {
+            _drawing = value;
+            MouseFilter = value ? MouseFilterMode.Stop : MouseFilterMode.Ignore;
+        }
     }
     private bool _isMouseDown = false;
 
@@ -41,23 +41,23 @@ public sealed partial class DrawWindow : Container
     {
         RobustXamlLoader.Load(this);
     }
-    
+
     protected override void Draw(DrawingHandleScreen handle)
     {
         foreach (var stroke in Strokes)
-	{
+        {
             Vector2 lastPoint = new();
 
-	    for (int i = 0; i < stroke.Points.Count; i++)
-	    {
-		var point = stroke.Points[i];
-		if (i != 0)
-		    handle.DrawLine(lastPoint, point, stroke.Color);
-		lastPoint = point;
-	    }
+            for (int i = 0; i < stroke.Points.Count; i++)
+            {
+                var point = stroke.Points[i];
+                if (i != 0)
+                    handle.DrawLine(lastPoint, point, stroke.Color);
+                lastPoint = point;
+            }
         }
 
-	base.Draw(handle);
+        base.Draw(handle);
     }
 
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
@@ -69,7 +69,7 @@ public sealed partial class DrawWindow : Container
 
         _isMouseDown = true;
     }
-    
+
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
@@ -79,24 +79,25 @@ public sealed partial class DrawWindow : Container
             return;
         }
 
-	_isMouseDown = false;
+        _isMouseDown = false;
 
-	// If the last stroke had at least one point, begin a new one
-	if (Strokes.Count != 0 && Strokes[^1].Points.Count > 1)
-	{
-	    Strokes.Add(new PaperStroke(new Color(0, 0, 0, 255)));
-	}
+        // If the last stroke had at least one point, begin a new one
+        if (Strokes.Count != 0 && Strokes[^1].Points.Count > 1)
+        {
+            Strokes.Add(new PaperStroke(new Color(0, 0, 0, 255)));
+        }
     }
 
     protected override void MouseMove(GUIMouseMoveEventArgs args)
     {
-	base.MouseMove(args);
-	if (Drawing && _isMouseDown) {
-	    if (Strokes.Count == 0)
-	    {
-		Strokes.Add(new PaperStroke(new Color(0, 0, 0, 255)));
-	    }
-	    Strokes[^1].AddPoint(args.RelativePosition);
-	}
+        base.MouseMove(args);
+        if (Drawing && _isMouseDown)
+        {
+            if (Strokes.Count == 0)
+            {
+                Strokes.Add(new PaperStroke(new Color(0, 0, 0, 255)));
+            }
+            Strokes[^1].AddPoint(args.RelativePosition);
+        }
     }
 }
