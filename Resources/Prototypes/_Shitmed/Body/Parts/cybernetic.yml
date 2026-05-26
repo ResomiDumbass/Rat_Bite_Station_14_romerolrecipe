@@ -222,8 +222,8 @@
   description: A cybernetic left leg that allows its wearer to run faster.
   components:
   - type: MovementBodyPart
-    walkSpeed: 3.125
-    sprintSpeed: 5.175
+    walkSpeed: 2.1875
+    sprintSpeed: 3.6225
 
 - type: entity
   parent: RightLegCybernetic
@@ -232,8 +232,8 @@
   description: A cybernetic left leg that allows its wearer to run faster.
   components:
   - type: MovementBodyPart
-    walkSpeed: 3.125
-    sprintSpeed: 5.175
+    walkSpeed: 2.1875
+    sprintSpeed: 3.6225
 
 - type: entity
   id: DexLeftHand

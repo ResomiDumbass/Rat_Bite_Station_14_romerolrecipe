@@ -99,8 +99,6 @@
   components:
   - type: NeurogenesisImperfecta
   - type: Uncloneable
-  - type: Unrevivable
-    cloneable: false
 
 - type: trait
   id: HairballCougher
