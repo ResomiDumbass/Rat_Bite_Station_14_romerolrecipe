@@ -7,7 +7,7 @@
   name: trait-prybar-prosthetics-name
   description: trait-prybar-prosthetics-desc
   category: Physical
-  cost: 14 # Ratbite, replaces need for insuls.
+  cost: 7
   components:
   - type: PrybarProsthetics
     prySpeedModifier: 1
@@ -379,7 +379,7 @@
   name: trait-platelet-factories-name
   description: trait-platelet-factories-desc
   category: Physical
-  cost: 10
+  cost: 14
   mutuallyExclusiveTraits:
   - Hemophilia
   speciesBlacklist:
@@ -389,12 +389,12 @@
     - BorgChassis
   components:
   - type: PlateletFactories
-    intervalSeconds: 1
+    intervalSeconds: 2
     damagePerInterval:
       groups:
-        Brute: -1.5
-        Burn: -2
-    critMultiplier: .25
+        Brute: -0.5
+        Burn: -0.5
+    critMultiplier: .10
 
 - type: trait
   id: NaniteRepairDrones
