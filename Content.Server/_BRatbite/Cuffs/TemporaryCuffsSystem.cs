@@ -20,8 +20,8 @@ public sealed class TemporaryCuffsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<TemporaryCuffsComponent, TemporaryCuffsAppliedEvent>(OnCuffsApplied);
         SubscribeLocalEvent<TemporaryCuffsComponent, TemporaryCuffsRemovedEvent>(OnCuffsRemoved);
+        SubscribeLocalEvent<TemporaryCuffsComponent, TemporaryCuffsStruggleInterruptedEvent>(OnCuffsStruggleInterrupted);
     }
 
     public override void Update(float frameTime)
@@ -48,15 +48,15 @@ public sealed class TemporaryCuffsSystem : EntitySystem
         }
     }
 
-    private void OnCuffsApplied(Entity<TemporaryCuffsComponent> ent, ref TemporaryCuffsAppliedEvent args)
-    {
-        RemovePending(ent.Owner);
-        _pending.Add(new PendingTemporaryCuffs(ent.Owner, args.Target, _timing.CurTime + ent.Comp.Lifetime));
-    }
-
     private void OnCuffsRemoved(Entity<TemporaryCuffsComponent> ent, ref TemporaryCuffsRemovedEvent args)
     {
         RemovePending(ent.Owner);
+    }
+
+    private void OnCuffsStruggleInterrupted(Entity<TemporaryCuffsComponent> ent, ref TemporaryCuffsStruggleInterruptedEvent args)
+    {
+        RemovePending(ent.Owner);
+        _pending.Add(new PendingTemporaryCuffs(ent.Owner, args.Target, _timing.CurTime + ent.Comp.Lifetime));
     }
 
     private void RemovePending(EntityUid cuffs)

@@ -9,4 +9,7 @@ public sealed partial class TemporaryCuffsComponent : Component
 {
     [DataField]
     public TimeSpan Lifetime = TimeSpan.FromSeconds(30);
+
+    [DataField]
+    public TimeSpan MinimumInterruptedStruggleTime = TimeSpan.FromSeconds(2);
 }

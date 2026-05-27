@@ -10,6 +10,8 @@
   cost: 14 # Ratbite, replaces need for insuls.
   components:
   - type: PrybarProsthetics
+    prySpeedModifier: 1
+    pryPowered: false
 
 - type: trait
   id: Vigor
@@ -114,8 +116,9 @@
   - type: Thieving
     stealthy: false
     toggleSubtle: true
-    timeMultiplier: 0.5
+    timeMultiplier: 0.6
     identifyHidden: true
+    traitGranted: true
 
 #- type: trait # Ratbite, removed this because its dumb strong.
 #  id: BionicLegs
@@ -125,6 +128,8 @@
 #  cost: 14
 #  components:
 #  - type: BionicLegs
+#      walkSpeed: 2.1875 # add your slower values
+#    sprintSpeed: 3.6225 # add your slower values
 
 - type: trait
   id: OsteogenesisImperfecta
@@ -305,6 +310,8 @@
   description: trait-dermal-armor-desc
   category: Physical
   cost: 6
+  speciesBlacklist:
+  - Gingerbread
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -342,6 +349,8 @@
   description: trait-temperature-tolerance-desc
   category: Physical
   cost: 1
+  speciesBlacklist:
+  - Resomi
   components:
   - type: TemperatureProtection
     coolingCoefficient: 0.6
@@ -410,6 +419,8 @@
   - SlimePerson
   - Felinid
   - Tajaran
+  - Scurret
+  - Gingerbread
   blacklist:
     components:
     - BorgChassis

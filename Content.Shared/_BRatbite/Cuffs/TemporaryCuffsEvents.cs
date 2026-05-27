@@ -13,3 +13,8 @@ public sealed class TemporaryCuffsRemovedEvent(EntityUid target) : EntityEventAr
 {
     public EntityUid Target = target;
 }
+
+public sealed class TemporaryCuffsStruggleInterruptedEvent(EntityUid target) : EntityEventArgs
+{
+    public EntityUid Target = target;
+}

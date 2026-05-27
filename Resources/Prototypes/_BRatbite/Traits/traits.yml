@@ -51,6 +51,24 @@
   - type: InstantChokeholdOnStaminaCrit
 
 - type: trait
+  id: MartialArtist
+  name: trait-martial-artist-name
+  description: trait-martial-artist-desc
+  category: Physical
+  cost: 5
+  mutuallyExclusiveTraits:
+  - PctTraining
+  - PaciFist
+  - StrikingCalluses
+  blacklist:
+    components:
+    - MartialArtsKnowledge
+    - KravMaga
+    - BorgChassis
+  components:
+  - type: MartialArtist
+
+- type: trait
   id: Marathoner
   name: trait-marathoner-name
   description: trait-marathoner-desc
@@ -99,8 +117,6 @@
   components:
   - type: NeurogenesisImperfecta
   - type: Uncloneable
-  - type: Unrevivable
-    cloneable: false
 
 - type: trait
   id: HairballCougher
