@@ -384,7 +384,7 @@
           types:
             Heat: -3
             Shock: -3
-            Cold: -3 # Was 1.5, Buffed due to limb damage changes(GoobStation) Ratbite - add a recipe for romerol, other minor chem changes, changed all healing of dermaline to -3. was -2 before
+            Cold: -3 # Was 1.5, Buffed due to limb damage changes(GoobStation) | Ratbite - was -2 before
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
