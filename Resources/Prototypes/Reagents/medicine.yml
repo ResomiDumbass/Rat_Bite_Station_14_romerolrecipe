@@ -1398,7 +1398,7 @@
       - !type:HealthChange
         damage:
           types:
-            Blunt: -5 # Was 3, Buffed due to limb damage changes(GoobStation) Ratbite - changed from -4 to -5
+            Blunt: -5 # Was 3, Buffed due to limb damage changes(GoobStation) | Ratbite - changed from -4
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
