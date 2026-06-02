@@ -64,3 +64,20 @@
     - Flash
     - RSOUndeterminedWeapon
 #    - UndeterminedRSOHardsuit  Removed until rework
+
+- type: chameleonOutfit
+  id: RedsightOverseerChameleonOutfit
+  job: RedsightOverseer
+  hasMindShield: true
+  equipment:
+    head: ClothingHeadHelmetRSOLaw
+    eyes: ClothingEyesGlassesRSO
+    ears: ClothingHeadsetAltCentCom
+    mask: ClothingMaskGasSecurity
+    neck: SurveillanceWirelessCameraBodySecurity
+    jumpsuit: ClothingUniformJumpsuitRedsightOverseer
+    belt: ClothingBeltSecurity
+    outerClothing: RSOJack
+    gloves: ClothingHandsGlovesRSOShock
+    shoes: ClothingShoesBootsJack
+
