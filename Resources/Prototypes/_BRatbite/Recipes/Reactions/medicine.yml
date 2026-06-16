@@ -12,3 +12,26 @@
       catalyst: true
   products:
     Teriparatide: 4
+- type: reaction
+  id: Caradine
+  reactants:
+    Water:
+      amount: 1
+    Inaprovaline:
+      amount: 1
+  products:
+    Caradine: 1
+- type: reaction
+  id: Cordrazine
+  reactants:
+    Silicon:
+      amount: 1
+    Sugar:
+      amount: 1
+    Zinc:
+      amount: 1
+    Sugar:
+      amount: 1
+  products:
+    Cordrazine: 1
+    - type: reaction
