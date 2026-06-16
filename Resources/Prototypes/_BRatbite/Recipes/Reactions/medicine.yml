@@ -13,14 +13,14 @@
   products:
     Teriparatide: 4
 - type: reaction
-  id: Caradine
+  id: Caridine
   reactants:
     Water:
       amount: 1
     Inaprovaline:
       amount: 1
   products:
-    Caradine: 1
+    Caridine: 1
 - type: reaction
   id: Cordrazine
   reactants:
