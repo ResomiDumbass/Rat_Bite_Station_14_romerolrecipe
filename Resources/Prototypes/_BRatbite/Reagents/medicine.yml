@@ -23,3 +23,68 @@
           damage:
             types:
               Poison: 0.5
+              
+- type: reagent
+  id: Caridine
+  name: reagent-name-caridine
+  group: Medicine
+  desc: reagent-desc-caridine
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#e0a5b9" #haha, funny pepto chem
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.05
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -1.5
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType # Goobstation - Yowie
+          type: Yowie
+          shouldHave: false
+        - !type:ReagentThreshold
+          min: 45
+        damage:
+          types:
+            Poison: 1.25
+      - !type:Jitter
+        conditions:
+        - !type:ReagentThreshold
+          min: 45
+
+- type: reagent
+  id: Cordrazine
+  name: reagent-name-cordrazine
+  group: Medicine
+  desc: reagent-desc-cordrazine
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: medicine
+  color: "#4a3c35" #haha, funny poop chem
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        conditions:
+          # they gotta be in crit first
+        - !type:MobStateCondition
+          mobstate: Critical
+        damage:
+          types:
+            Brute: -0.6
+            Cold: -0.4
+            Heat: -0.4
+            Poison: -0.4
+      - !type:HealthChange
+        conditions:
+        - !type:OrganType # Goobstation - Yowie
+          type: Yowie
+          shouldHave: false
+        - !type:ReagentThreshold
+          min: 100
+        damage:
+          types:
+            Cellular: 0.25
