@@ -872,7 +872,7 @@
       params:
         volume: -3
         variation: 0.1
-    ClapSingle:
+    ClapSingle: # Ratbite
       collection: ClapSingle
 
 - type: emoteSounds
@@ -895,6 +895,8 @@
       params:
         volume: -3
         variation: 0.1
+    ClapSingle: # Ratbite
+      collection: ClapSingle
 
 - type: emoteSounds
   id: ReptilianBodyEmotes
@@ -918,6 +920,8 @@
       params:
         volume: -3
         variation: 0.1
+    ClapSingle: # Ratbite
+      collection: ClapSingle
 
 # mobs
 - type: emoteSounds
@@ -1046,3 +1050,5 @@
       params:
         volume: -3
         variation: 0.1
+    ClapSingle: # Ratbite 
+      collection: ClapSingle
