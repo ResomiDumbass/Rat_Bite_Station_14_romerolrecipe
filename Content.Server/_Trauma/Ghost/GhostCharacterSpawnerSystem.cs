@@ -6,9 +6,9 @@ using Content.Server.Ghost.Roles.Components;
 using Content.Server.Ghost.Roles.Events;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Systems;
+using Content.Server.Traits;
 using Content.Shared.Preferences;
 using Content.Trauma.Shared.Ghost;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 
 namespace Content.Trauma.Server.Ghost;
@@ -23,6 +23,7 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
     [Dependency] private readonly IServerPreferencesManager _prefs = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StationSpawningSystem _spawning = default!;
+    [Dependency] private readonly TraitSystem _traits = default!;
     //    [Dependency] private readonly EntityQuery<GhostRoleComponent> _roleQuery = default!;
 
     public override void Initialize()
@@ -35,7 +36,7 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
 
     private void OnTakeGhostRole(Entity<GhostCharacterSpawnerComponent> ent, ref TakeGhostRoleEvent args)
     {
-	var _roleQuery = EntityManager.GetEntityQuery<GhostRoleComponent>();
+        var _roleQuery = EntityManager.GetEntityQuery<GhostRoleComponent>();
         if (args.TookRole ||
             !_roleQuery.TryComp(ent, out var ghostRole) ||
             !_ghostRole.CanTakeGhost(ent, ghostRole))
@@ -58,6 +59,8 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
         RaiseLocalEvent(mob, ev, true);
 
         _ghostRole.GhostRoleInternalCreateMindAndTransfer(args.Player, ent, mob, ghostRole);
+        // Ratbite: apply traits
+        _traits.ApplyTraits(mob, profile);
 
         // TODO: add to station records if it's desired in the future
 
@@ -75,11 +78,11 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
             return;
 
         HumanoidCharacterProfile? profile = null;
-        if (args.Session is {} session)
+        if (args.Session is { } session)
         {
             var user = session.UserId;
             profile = GetDesiredProfile(user);
-            if (profile?.Name is {} name)
+            if (profile?.Name is { } name)
             {
                 _character.AddSpawnedCharacter(user, name);
                 _character.SendData(session);
@@ -92,10 +95,10 @@ public sealed class GhostCharacterSpawnerSystem : EntitySystem
     }
 
     public HumanoidCharacterProfile? GetDesiredProfile(NetUserId user)
-        => _character.GetGhostRoleSlot(user) is {} slot &&
+        => _character.GetGhostRoleSlot(user) is { } slot &&
             _prefs.TryGetCachedPreferences(user, out var prefs) &&
-						       prefs.Characters.TryGetValue(slot, out var profile) &&
-						       profile is HumanoidCharacterProfile
-						       ? (HumanoidCharacterProfile) profile
+                               prefs.Characters.TryGetValue(slot, out var profile) &&
+                               profile is HumanoidCharacterProfile
+                               ? (HumanoidCharacterProfile) profile
             : null;
 }

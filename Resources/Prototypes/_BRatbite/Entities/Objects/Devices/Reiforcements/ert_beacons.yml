@@ -21,6 +21,7 @@
     - type: Loadout
     - type: AutoImplant
       implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, BluespaceLifelineImplant ] # bluespace implant because unrobust ERT keep giving antags/selfantags free loot
+    - type: MindShield
 
 # ERT leader
       
