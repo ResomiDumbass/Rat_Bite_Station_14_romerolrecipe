@@ -51,7 +51,9 @@ public sealed partial class IVSystem : EntitySystem
             if (_timing.CurTime < comp.NextUpdate)
                 continue;
             if (comp.AttachedEntity == null) continue;
-            if (!Transform(comp.Owner).Coordinates.TryDistance(EntityManager, Transform(comp.AttachedEntity.Value).Coordinates, out var distance) || distance > comp.MaxDistance)
+            var xform = Transform(comp.Owner);
+
+            if (xform.GridUid != xform.ParentUid || !xform.Coordinates.TryDistance(EntityManager, Transform(comp.AttachedEntity.Value).Coordinates, out var distance) || distance > comp.MaxDistance)
             {
                 ChangeAttachedEntity((comp.Owner, comp), null);
                 return;
