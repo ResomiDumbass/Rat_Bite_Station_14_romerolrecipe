@@ -50,10 +50,6 @@
         damage:
           types:
             Poison: 1.25
-      - !type:Jitter
-        conditions:
-        - !type:ReagentThreshold
-          min: 45
 
 - type: reagent
   id: Cordrazine
