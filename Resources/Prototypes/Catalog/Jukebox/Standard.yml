@@ -57,9 +57,4 @@
   name: PigeonBeans - Sunset
   path:
     path: /Audio/Jukebox/sunset.ogg
-
-- type: jukebox
-  id: track66
-  name: Unknown - Track 66
-  path:
-    path: /Audio/_BRatbite/Jukebox/Track66.ogg
+    
