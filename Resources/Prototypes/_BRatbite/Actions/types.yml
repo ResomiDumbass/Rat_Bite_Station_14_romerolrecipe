@@ -50,7 +50,7 @@
   parent: BaseAction
   id: ActionShakeAwake
   name: Shake Yourself Awake
-  description: Shake yourself awakt from cryo sickness
+  description: Shake yourself awake from cryo sickness
   components:
   - type: Action
     checkCanInteract: false
